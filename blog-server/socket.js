@@ -7,7 +7,6 @@ let { formatDate } = require('./core/util/util')
 
 const users = {}
 
-
 /*
   0. 登录或者进入聊天室建立会话
   1. 匿名和登录用户都可以使用聊天室
@@ -43,15 +42,10 @@ on
         
 */
 
-
-
-
-
 io.on('connection', (socket) => {
   //socket 对象就是 建立连接的会话对象
   //监听client客户端emit的message事件
-  console.log('连接已经建立', `id:${socket.id}`)
-
+  // console.log('连接已经建立', `id:${socket.id}`)
   socket.on('online', ({ uid, nikname }) => {
     if (users[uid]) {
       //如果uid存在 说明已登录 
@@ -65,7 +59,6 @@ io.on('connection', (socket) => {
     socket.uid = uid
     socket.ghost = false
   })
-
   //进入聊天室
   socket.on('enterChat', ({ uid = createTempId(), nikname }) => {
     //广播用户昵称进入聊天室
@@ -100,7 +93,6 @@ io.on('connection', (socket) => {
     let uid = socket.uid
     delete users[uid]
   })
-
   socket.on('send', (msg) => {
     let nikname = users[socket['uid']]['nikname']
     console.log(socket.uid, Object.keys(users))
@@ -110,7 +102,6 @@ io.on('connection', (socket) => {
       time: formatDate()
     })
   })
-
 })
 
 function createTempId () {
@@ -123,59 +114,3 @@ webSocketServer.listen(8888, () => {
 
 module.exports = webSocketServer
 
-
-/*
-io socket服务对象
-io.sockets 接入的socket - client客户端的所有会话对象
-io.close 关闭socket服务
-events
-  io.on 监听事件
-    connection client客户端建立ws连接
-    disconnect client客户端断开ws连接
-    disconnecting 断开中
-
-  io.emit 触发事件
-    自定义事件
-socket 会话对象
-  socket.id 会话id
-  socket.client 会话客户端对象
-  socket.send([…args][, ack])
-    socket.emit('message',data)
-    socket.on('message',(data)=>{
-
-    })
-  //监听事件
-  socket.on('事件名称',(data)=>{
-    //事件回调 data接收到的信息
-  })
-  //触发事件
-  socket.emit('事件名称',信息)
-
-  io.sockets.emit()
-    向所有与socketIO server建立连接的客户端socket会话广播信息
-  socket.broadcast.emit()
-    该属性触发事件发出将仅向除了 发送方 以外的所有 客户端会话 广播事件数据。
-*/
-/*
-  文字在线聊天室
-
-  客户端
-    昵称
-      登录用户 (userInfo.nikname)
-      未登录
-        输入昵称
-        建立连接
-    信息输入
-      input
-    信息展示
-      信息列表
-        他人信息
-        自身信息
-        信息日期
-        昵称
-  服务端
-    用户列表 clientList
-      name:nikname
-      socket:socket
-
-*/

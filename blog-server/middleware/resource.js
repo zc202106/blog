@@ -8,6 +8,7 @@ module.exports = options => {
       req.Model = require(`../models/${modelName}`)
       next()
     } catch (err) {
+      console.log(err);
       next(createError(404))
     }
   }

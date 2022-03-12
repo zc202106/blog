@@ -1,6 +1,3 @@
-
-
-
 const userTtC = {
   'USER_ADD': "4010",
   'USER_TRIM': '4012',
@@ -26,7 +23,6 @@ const userCtM = {
  
 }
 
-
 module.exports = {
   getUserStatusMsg (tag, isSuccess) {
     if (!tag) {
@@ -43,10 +39,3 @@ module.exports = {
     }
   }
 }
-/*
-  statusCode  4001
-  statusTag  'USER_INN'
-  errMsg "用户注册成功"
-
-
-*/

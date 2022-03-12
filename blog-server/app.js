@@ -13,10 +13,6 @@ const { getPublicKeySync } = require('./core/rsaControl')
 
 require('./socket')
 
-
-// const indexRouter = require('./routes/index');
-// const registerRouter = require('./routes/register');rre
-// const getPublicKey = require('./routes/getPubKey');
 const app = express();
 
 app.use(cors({
@@ -29,10 +25,6 @@ app.use(cors({
   "optionsSuccessStatus": 200 //options 请求返回状态码
 }))
 
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'hbs');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -41,7 +33,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'uploads')));
 //中间件  nameMiddleware
 const resourceMiddleware = require('./middleware/resource')
-
 //路由  nameRoute
 const busRoute = require('./routes/bus');
 const adminRoute = require('./routes/admin');
@@ -50,9 +41,7 @@ const uploadRoute = require('./routes/upload')
 const searchRoute = require('./routes/search')
 const artLikesRoute = require('./routes/artLikes');
 const userRoute = require('./routes/user')
-const { send } = require('process');
-
-
+// const { send } = require('process');
 
 app.use(expressJwt({
   secret: getPublicKeySync(), //解密秘钥 
@@ -82,13 +71,10 @@ app.use(expressJwt({
     { url: /articles\/likes/ }
   ]
 }))
-
 //资源路由
 app.use('/api/rest/:resource', resourceMiddleware(), busRoute)
-
 //登录注册
 app.use('/admin', adminRoute)
-
 //用户信息
 app.use('/user', userRoute)
 
@@ -102,35 +88,22 @@ app.use('/index', (req, res, next) => {
       message: '请先登录'
     })
   }
-
 })
-
 //获取公钥
 app.use('/keys', pubKeyRoute)
-
 //文件上传
 app.use('/upload', uploadRoute)
-
 //文章搜索
 // app.use('/articles/search', searchRoute)
-
 //文章点赞
 app.use('/articles/likes', artLikesRoute)
-
-
-
-
-
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
-
 const ERROR_CODE_MAP = {
   'LIMIT_FILE_SIZE': `文件大小不得超过 ${maxFileSize} bytes`,
-
 }
 const ERROR_STATUS_MAP = {
   '401': "无权限操作,请先登录"
@@ -146,10 +119,6 @@ const QUE_MAP = {
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  // res.locals.message = err.message;
-  // res.locals.error = req.app.get('env') === 'development' ? err : {};
-  // render the error page
   if (err.message.indexOf('duplicate key error') !== -1) {
     let repeatKey = Object.entries(err.keyPattern)?.map(([key, value]) => {
       return `${QUE_MAP?.[key]}不能重复`

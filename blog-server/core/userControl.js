@@ -8,10 +8,8 @@ module.exports = {
   async addUser (username, pwd) {
     //TODO pwd 公钥加密
     let password = encrypt(pwd)
-
     //查看数据库是否存在同名用户 
     let user = await this.getUserInfo(username)
-
     //如果用户不存在
     if (user?.['tag'] === 'USER_NOF') {
       let userId = await getUsersNum()
@@ -29,14 +27,12 @@ module.exports = {
       } catch (err) {
         console.log(err)
       }
-
     }
     if (user?.['tag'] === 'USER_FOND') {
       return {
         ...getUserStatusMsg('USER_DR')
       }
     }
-
     return {
       statusCode: user.statusCode,
       errMsg: '注册失败'
@@ -77,13 +73,11 @@ module.exports = {
           ...getUserStatusMsg('USER_NOF')
         }
       }
-
       if (userInfo['user_name'] === username) {
         return {
           ...getUserStatusMsg('USER_FOND'),
         }
       }
-
     } catch (err) {
       console.error(err)
       return {
@@ -137,7 +131,6 @@ async function appendUser ({ user_id = false, user_name = false, password = fals
   await setUsers(user)
   return true
 }
-
 
 async function getUsersNum () {
   let users = await getUsers()

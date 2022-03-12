@@ -1,4 +1,4 @@
-const { decrypt, encrypt, generateKeys } = require('../core/util/util')
+const { generateKeys } = require('../core/util/util')
 const fs = require('fs').promises
 const fsSync = require('fs')
 const { pubKeyPath, priKeyPath } = require('../config')

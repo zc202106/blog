@@ -33,11 +33,9 @@ const upload = multer({
   }
 })
 
-
 router.post('/:classify', upload.any(), async (req, res, next) => {
   try {
     let fileType = FILE_TYPE[req.params['classify']] ?? ''
-
     assert(fileType, 400, '文件上传分类不正确')
     let uid = req._id
     if (fileType === 'user') {
@@ -53,7 +51,6 @@ router.post('/:classify', upload.any(), async (req, res, next) => {
         fileURL: fileURLS[0]
       }
     }
-
     if (fileType === 'article') {
       let data = fileURLS
       resultData = {
@@ -66,8 +63,6 @@ router.post('/:classify', upload.any(), async (req, res, next) => {
     console.log(err)
     next(err)
   }
-
 })
-
 
 module.exports = router;

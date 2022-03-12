@@ -6,14 +6,10 @@ const Column = require('../models/Column')
 const assert = require('http-assert')
 const qs = require('qs')
 
-
-
-
 router.put('/', async (req, res, next) => {
   let putData = req.body
   let isPass = req.isPass //鉴权结果
   let userId = req._id //userID
-
   try {
     assert(isPass, 400, "无权修改")
     let result = await User.findByIdAndUpdate(userId, putData, { runValidators: true, new: true })
@@ -45,7 +41,6 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
-
 
 module.exports = router
 

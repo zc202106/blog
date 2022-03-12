@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const { uploadURL } = require('../config')
 const { formatDate } = require('../core/util/util')
+
 const schema = new mongoose.Schema({
   title: {
     type: String,
@@ -23,7 +24,7 @@ const schema = new mongoose.Schema({
         return val
       }
     },
-    required: true,
+    required: true
   },
   //更新日期
   date: {

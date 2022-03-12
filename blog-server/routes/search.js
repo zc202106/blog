@@ -23,7 +23,6 @@ const POP_PUT_MAP = require('../plugins/POP_PUT_MAP')
 const RESOURCE_POST_MAP = require('../plugins/RESOURCE_POST_MAP')
 
 router.get('/', async (req, res, next) => {
-
   let modelName = 'Article'
   let { options = {}, page = 1, size = 100, query = {}, dis = 8, populate = {} } = req.query
   query = qs.parse(query)
@@ -47,9 +46,6 @@ router.get('/', async (req, res, next) => {
     console.log(err)
     next(createError(422, "获取失败"))
   }
-
 });
-
-
 
 module.exports = router;

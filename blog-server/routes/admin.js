@@ -13,7 +13,6 @@ const CLASSIFY = {
 }
 
 router.post('/:classify', async (req, res, next) => {
-
   let { username, password } = req.body
   let { classify } = req.params
 
@@ -30,8 +29,6 @@ router.post('/:classify', async (req, res, next) => {
       assert(user, 422, "用户不存在")
       //校验密码
       assert.equal(decrypt(password), decrypt(decrypt(user.password)), 422, '账号密码错误')
-
-
     }
     if (classify === 'register') {
       user = await User.create(req.body)
@@ -51,48 +48,4 @@ router.post('/:classify', async (req, res, next) => {
   }
 });
 
-
-
 module.exports = router;
-
-
-
-
-
-
-// /* POST register listing. */
-// router.post('/', async function (req, res, next) {
-
-//   let { username, password } = req.body
-//   // +password 设置追加返回password内容 password Schema设置select为false时使用
-//   try {
-//     if (!username || username?.trim()?.length === 0 || !password || password?.trim()?.length === 0) {
-//       assert(false, 422, "账号密码必填")
-//     }
-//     const user = await User.create(req.body)
-
-//     //生成token
-//     let token = await sendToken(user)
-//     res.send(200, {
-//       message: '注册成功',
-//       data: {
-//         userId: user._id,
-//         token: token
-//       }
-//     })
-//   } catch (err) {
-//     if (err.message.indexOf('duplicate key error') !== -1) {
-//       let repeatKey = Object.entries(err.keyPattern)?.map(([key, value]) => {
-//         return `${QUE_MAP?.[key]}不能重复`
-//       })[0]
-//       next(createError(422, repeatKey))
-//     }
-//     let paramErrors = Object.entries(err.errors).map(([key, val]) => {
-//       return `${val.message}`
-//     }).join(',')
-//     next(createError(422, paramErrors))
-//   }
-// });
-
-// module.exports = router;
-

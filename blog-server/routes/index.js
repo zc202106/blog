@@ -19,7 +19,6 @@ router.get('/', expressJwt({
       }
       next()
     })
-
   }
 }), async function (req, res, next) {
   res.render('index', { title: 'Express' });

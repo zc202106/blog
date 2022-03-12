@@ -2,10 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const NodeRSA = require('node-rsa');
 const { priKeyPath, pubKeyPath } = require('../../config');
-const { compile } = require('morgan');
 const mongoPage = require('mongoose-sex-page');
 const qs = require('qs')
-
 
 function generateKeys () {
   const newkey = new NodeRSA({ b: 512 });
@@ -15,16 +13,13 @@ function generateKeys () {
 
   fs.writeFileSync(priKeyPath, private_key);
   fs.writeFileSync(pubKeyPath, public_key);
-
-
 }
 
 function encrypt (plain) {
   let public_key = fs.readFileSync(pubKeyPath, 'utf8');
   const nodersa = new NodeRSA(public_key);
   nodersa.setOptions({ encryptionScheme: 'pkcs1' });
-  const encrypted = nodersa.encrypt(plain, 'base64');
-  return encrypted;
+  return nodersa.encrypt(plain, 'base64');
 }
 
 function decrypt (cipher) {
@@ -51,7 +46,6 @@ function toDouble (num) {
 }
 
 function formatDate (date = new Date(), format = "yyyy-MM-dd hh:mm:ss") {
-
   let regMap = {
     'y': date.getFullYear(),
     'M': toDouble(date.getMonth() + 1),
@@ -60,13 +54,11 @@ function formatDate (date = new Date(), format = "yyyy-MM-dd hh:mm:ss") {
     'm': toDouble(date.getMinutes()),
     's': toDouble(date.getSeconds()),
   }
-
   //逻辑(正则替换 对应位置替换对应值) 数据(日期验证字符 对应值) 分离
   return Object.entries(regMap).reduce((acc, [reg, value]) => {
     return acc.replace(new RegExp(`${reg}+`, 'g'), value);
   }, format);
 }
-
 
 module.exports = {
   generateKeys,
@@ -74,4 +66,4 @@ module.exports = {
   decrypt,
   pagination,
   formatDate
-};
+}
