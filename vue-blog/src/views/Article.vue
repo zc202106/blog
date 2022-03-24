@@ -45,7 +45,7 @@ export default {
           this.pushLike({ aid })
         }
       } catch (err) {
-        this.$notify.success({
+        this.$notify.error({
           title: '获取失败',
           message: err.message
         })

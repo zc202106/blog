@@ -8,6 +8,7 @@
                  v-for="item in articles"
                  :key="item.id">
           <router-link :to="{name:'article',params:{id:item.id}}">
+
             <ArticleItem :article="item" />
           </router-link>
         </el-card>
@@ -28,6 +29,7 @@ import QS from 'qs'
 export default {
   name: 'ArticleList',
   inject: ['closeLoadClock'],
+
   components: {
     ArticleItem
   },
@@ -67,12 +69,10 @@ export default {
     this.getArticles()
   },
   methods: {
-    searchArticle () {
-      (q) => {
+    searchArticle (q) {
         this.q = q
         this.resetArticles()
         this.getArticles()
-      }
     },
     resetArticles () {
       this.articles = []
@@ -96,6 +96,7 @@ export default {
       if (Object.entries(query).length > 0) {
         data.query = QS.stringify(query)
       }
+
       this.$api({ type: 'articles', data }).then(result => {
         if (this.articles.length >= result.total) {
           //没有更多了
@@ -106,7 +107,7 @@ export default {
         this.closeLoadClock() //调用父组件provide传递的关闭load锁方法
         this.page++
       }).catch(err => {
-        this.$notify.success({
+        this.$notify.error({
           title: '获取失败',
           message: err.message
         })

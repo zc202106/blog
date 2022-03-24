@@ -14,6 +14,7 @@ import { io } from 'socket.io-client'
 
 
 let actMe = false
+let isLogin = false
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -52,8 +53,9 @@ export default new Vuex.Store({
       commit('SET_TOKEN')
       dispatch('getUserInfo')
     },
-    async logout({ commit }) {
+    async logout ({ commit }) {
       actMe = true
+      isLogin = false
       Vue.prototype.$ws?.close()
       commit('CANCEL_TOKEN')
     },
@@ -87,11 +89,12 @@ export default new Vuex.Store({
       try {
         let userInfo = await http({ type: 'getUserInfo' })
         commit('SET_USERINFO', userInfo)
-        if (!isMobile()) {
+        if (!isMobile() && !isLogin) {
           Vue.prototype.$notify.success({
             title: '登录成功',
             message: `欢迎你 ${userInfo.nikname}`
           })
+          isLogin = true
           if (router.app._route.name !== 'index') {
             router.push('/index')
           }

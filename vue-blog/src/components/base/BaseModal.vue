@@ -11,8 +11,7 @@
            class="dialog-footer">
         <el-button v-for="btn in btns"
                    :key="btn.targetName"
-                   @click="handlerBtn(btn.targetName,btn.isSubmit)">{{btn.name}}
-                   </el-button>
+                   @click="handlerBtn(btn.targetName,btn.isSubmit)">{{btn.name}}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -22,8 +21,8 @@
 import MODAL_DATA from '@/config/modal.config'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions } = createNamespacedHelpers('modal')
-import BaseForm from './BaseForm'
 
+import BaseForm from './BaseForm'
 export default {
   name: 'BaseModal',
   components: {
@@ -34,6 +33,7 @@ export default {
 
     }
   },
+
   computed: {
     ...mapState(['isShow', 'type']),
     title () {
@@ -60,7 +60,7 @@ export default {
     }
   },
   mounted () {
-  
+
   },
   methods: {
     handlerBtn (action, isSubmit) {
@@ -93,6 +93,7 @@ export default {
         }
       });
     },
+
     ...mapActions(['close', 'open', 'confirm'])
   },
 };

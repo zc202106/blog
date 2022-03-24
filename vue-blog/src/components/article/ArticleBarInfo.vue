@@ -37,7 +37,7 @@ export default {
   },
   data () {
     return {
-      isInitLike: 0
+      isInitLike: false
     }
   },
   created () {
@@ -49,7 +49,7 @@ export default {
       return this.localLike(aid)
     },
     likeNum () {
-      return Math.max(this.info.like_num + this.isLike + this.isInitLike, 0)
+       return Math.max(this.info.like_num + this.isLike + this.isInitLike, 0)
     },
     ...mapGetters({
       localLike: 'isLike'

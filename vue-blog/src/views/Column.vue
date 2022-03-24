@@ -8,6 +8,7 @@
                :showTooltip="false"
                :wordClick="wordClickHandler">
     </WordCloud>
+
   </div>
 </template>
 
@@ -40,6 +41,7 @@ export default {
       this.getColumns()
     })
   },
+
   methods: {
     wordClickHandler (name) {
       let columnId = this.columns.find(item => {

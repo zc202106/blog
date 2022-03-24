@@ -36,6 +36,8 @@ VueRouter.prototype.push = function (local) {
   return originalPush.call(this, local).catch(err => err)
 }
 
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -138,6 +140,7 @@ const routes = [
   }
 ]
 
+
 const router = new VueRouter({
   routes
 })
@@ -152,7 +155,8 @@ router.beforeEach((to, from, next) => {
     })
     NProgress.done()
     next('/index')
-  } else {
+  }
+  else {
     next()
   }
 })
@@ -160,5 +164,6 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
   NProgress.done()
 })
+
 
 export default router

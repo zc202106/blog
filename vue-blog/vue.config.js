@@ -5,7 +5,15 @@ function resolve (dir) {
 }
 module.exports = {
   publicPath: '',
-
+  pwa: {
+    iconPaths: {
+      favicon32: './favicon.ico',
+      favicon16: './favicon.ico',
+      appleTouchIcon: './favicon.ico',
+      maskIcon: './favicon.ico',
+      msTileImage: './favicon.ico'
+    }
+  },
   chainWebpack: config => {
     if (process.env.NODE_ENV === 'production') {
       config
@@ -31,6 +39,10 @@ module.exports = {
       .set("views", resolve("src/views"))
     // .set("base", resolve("baseConfig"))
     // .set("public", resolve("public")); esLint
+    config.plugin('html').tap((args) => {
+      args[0].title = '菜鸟码农个人博客'
+      return args
+    })
   },
   configureWebpack: config => {
     if (process.env.NODE_ENV === 'production') {

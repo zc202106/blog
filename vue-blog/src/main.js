@@ -15,7 +15,10 @@ import '@/plugins/element'
 import '@/plugins/http'
 import '@/plugins/vuescroll'
 
+
 // import _ from 'lodash'
+
+
 
 Vue.use(animated)
 
@@ -31,8 +34,11 @@ window.alert = function (value) {
   })
 }
 
+
+
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+
 }).$mount('#app')

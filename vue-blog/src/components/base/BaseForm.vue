@@ -8,6 +8,7 @@
                     label-width="100px"
                     :rules="validates[item['query']]"
                     :prop="item['query']">
+
         <el-upload v-if="item.type === 'avatar'"
                    class="avatar-uploader"
                    ref="upload"
@@ -35,6 +36,7 @@
                   :name="item['query']"
                   autocomplete="off"></el-input>
       </el-form-item>
+
     </el-form>
   </div>
 </template>
@@ -58,6 +60,7 @@ export default {
       }
     };
   },
+
   created () {
     if (this.type === 'userInfo') {
       //筛选排除 vuex中userInfo里不存在 form.config['userInfo']中的项
@@ -148,4 +151,5 @@ export default {
   width 178px
   height 178px
   display block
+  user-select: none
 </style>

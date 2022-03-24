@@ -22,11 +22,12 @@ import {
   RadioButton,
   RadioGroup,
   Notification,
-  Notify,
+  Upload
 } from 'element-ui'
 
 Vue.use(Notification)
 Vue.use(Input)
+Vue.use(Upload)
 Vue.use(Form)
 Vue.use(Button)
 Vue.use(Container)

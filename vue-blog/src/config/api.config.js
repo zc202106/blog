@@ -32,6 +32,10 @@ export default {
     url: '/api/rest/articles',
     method: 'GET'
   },
+  'search': {
+    url: '/articles/search',
+    method: 'GET'
+  },
   'columns': {
     url: '/api/rest/columns',
     method: 'GET'

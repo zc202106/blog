@@ -1,6 +1,7 @@
 <template>
   <article class="blog-content--item"
            v-if="article">
+
     <h3 class="blog-item--title">{{article.title}}</h3>
     <p class="blog-item--date">
       <i class="glyphicon glyphicon-time"></i> {{article.date}}
@@ -8,13 +9,14 @@
     <p class="blog-item--author">{{nikname}}</p>
     <img class="blog-item--illu"
          :src="article.cover"
-         alt="!">
+         alt="">
     <p class="blog-item--desc">
       {{content}}
     </p>
     <p class="blog-item--tags"><span class="blog-tags--hit">浏览
         ({{article.hit_num}})</span><span class="blog-tags--like">点赞 ({{article.like_num}})</span> <span class="blog-tags--comment">评论
         ({{article.comment_num}})</span></p>
+
   </article>
 </template>
 
@@ -91,7 +93,7 @@ export default {
 .blog-item--desc
   display -webkit-box
   overflow hidden
-  height 90px
+  height 89px
   padding padding-space * 3
   text-align left
   text-indent 2em

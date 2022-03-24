@@ -42,7 +42,7 @@ export default {
           localLikes.splice(idx, 1)
         }
         store.set(LIKES_NAME, localLikes)
-        console.log(localLikes)
+        // console.log(localLikes)
         commit('CHANGE_LIKES')
       }
     },

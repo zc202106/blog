@@ -9,6 +9,7 @@
                 class="blog-editor-input"
                 size="medium"
                 placeholder="文章标题"></el-input>
+
       <h3 class="blog-editor-title">内容</h3>
       <div id="blog-editor-textarea">
 
@@ -21,13 +22,16 @@
                            :label="item.id">{{item.name}}</el-radio-button>
         </el-radio-group>
       </div>
+
       <div class="blog-editor-button">
         <el-button type="primary"
                    @click="submitEditor">提交</el-button>
         <el-button type="primary"
                    @click="cancelEditor">重置</el-button>
       </div>
+
     </el-card>
+
   </transition>
 </template>
 
@@ -97,10 +101,10 @@ export default {
         return
       }
       this.postEditorData()
+
     },
     cancelEditor () {
       this.editor.txt.clear()
-      this.$refs.title.focus()
     },
     validateEditor () {
       if (this.title.trim().length === 0) {
@@ -128,6 +132,7 @@ export default {
         column: this.column,
         cover: this.content.match(/<img src="([^"']*)"/)?.[1] || undefined
       }
+
       try {
         this.$api({
           type: 'postArticle', data: JSON.parse(JSON.stringify(postData))
@@ -143,6 +148,7 @@ export default {
           message: '提交失败'
         })
       }
+
     }
   },
   beforeDestroy () {
@@ -154,8 +160,6 @@ export default {
 </script>
 
 <style lang="stylus" >
-.blog-editor-textarea
-  z-index 10
 .blog-editor-title
   padding 12px 0
   font-size 16px
@@ -171,6 +175,7 @@ export default {
   padding-top 20px
   display flex
   justify-content space-around
+  cursor pointer
   & button
     flex 1
     line-height 22px

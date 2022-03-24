@@ -4,7 +4,7 @@
       <div class="blog-avatar">
         <img class="blog-avatar--pic"
              :src="userInfo.avatar"
-             alt="!">
+             alt="">
       </div>
       <div class="blog-info">
         <h3 class="blog-info--nicknam">{{userInfo.nikname}}</h3>
@@ -25,6 +25,7 @@
         <p class="blog-info--content">{{userInfo.signature}}</p>
       </div>
     </el-card>
+
   </el-aside>
 </template>
 

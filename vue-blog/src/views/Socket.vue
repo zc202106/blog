@@ -5,6 +5,7 @@
            :class="chat.dis"
            v-for="chat in chatList"
            :key="chat.id">
+
         <span v-if="chat.nikname"
               class="blog-chat--nikname">{{chat.nikname}}</span>
         <div :class="[chat.type === 'action'&&'notif','blog-chat--box']">
@@ -21,7 +22,9 @@
                 @keydown.native.enter="sendChat"></el-input>
       <el-button type="primary"
                  @click="sendChat">发送消息</el-button>
+
     </div>
+
     <el-dialog title="欢迎聊天"
                :visible.sync="dialogVisible"
                width="30%">
@@ -37,6 +40,7 @@
 </template>
 
 <script>
+
 import formatDate from '@/util/formatDate'
 import { io } from 'socket.io-client'
 let idx = 0
@@ -63,6 +67,7 @@ export default {
     } else {
       this.ws = io(process.env.VUE_APP_USER_CHAT_PATH, { transports: ['websocket'] })
     }
+
 
     this.ws.on('chat', (data) => {
       this.serverChat(data)

@@ -7,6 +7,7 @@
     <BaseForm v-if="isCreated"
               ref="form"
               type="userInfo" />
+
     <div class="blog-btn--wrap">
       <el-button type="success"
                  @click="submit">提交修改</el-button>
@@ -50,6 +51,7 @@ export default {
         }
       });
     },
+
     reset () {
       this.isCreated = false
       this.$nextTick(function () {
